@@ -1,0 +1,24 @@
+Q. Given an integer x, return true if x is a palindrome, and false otherwise.
+
+
+class Solution {
+    public boolean isPalindrome(int x) {
+        int res = x;
+        int sum = 0;
+
+        if(res<0){
+            return false;
+        }
+        while(x>0){
+            int rem = x % 10;
+            sum = (sum * 10) + rem;
+            x = x / 10;
+        }
+        if(sum == res){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
