@@ -1,0 +1,25 @@
+14-feb. Rearrange Array Elements by Sign :
+2149.
+
+
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int n = nums.length;
+        int even = 0;
+        int odd = 1;
+        int [] ans = new int[n];
+
+        for(int i=0; i<n; i++){
+            if(nums[i] >= 0){
+                ans[even] = nums[i];
+                even += 2;
+            }
+            else{
+                ans[odd] = nums[i];
+                odd += 2;
+            }
+            
+        }
+        return ans;
+    }
+}
