@@ -1,0 +1,46 @@
+18-feb. Meeting Rooms III
+2402.
+
+
+
+class Solution {
+    public int mostBooked(int n, int[][] meetings) {
+        HashMap<Integer, Integer> log = new HashMap<>();
+        PriorityQueue<Integer> usedRoom = new PriorityQueue<>((a, b) -> 
+                                                            log.get(a) - log.get(b) == 0 ? 
+                                                            a - b : log.get(a) - log.get(b)
+                                                            );
+        PriorityQueue<Integer> availableRoom = new PriorityQueue<>();
+
+        int[] count = new int[n];
+        for (int i = 0; i < n; i++) {
+            log.put(i, 0);
+            availableRoom.offer(i);
+        }
+        Arrays.sort(meetings, (a, b) -> a[0] - b[0]);
+        for (int[] meeting : meetings) {
+            int duration = meeting[1] - meeting[0];
+            while (usedRoom.size() > 0 && log.get(usedRoom.peek()) <= meeting[0]) availableRoom.offer(usedRoom.poll());
+            int allocRoom;
+            if (availableRoom.isEmpty()) {
+                allocRoom = usedRoom.poll();
+                log.put(allocRoom, duration + log.get(allocRoom));
+            } else {
+                allocRoom = availableRoom.poll();
+                log.put(allocRoom, meeting[1]);
+            }
+            count[allocRoom]++;
+            usedRoom.offer(allocRoom);
+        }
+
+        int max = -1;
+        int res = -1;
+        for (int i = 0; i < n; i++) {
+            if (count[i] > max) {
+                res = i; 
+                max = count[i];
+            }
+        }
+        return res;
+    }
+}
