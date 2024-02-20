@@ -1,0 +1,16 @@
+20-feb. Missing Number :
+268.
+
+class Solution {
+    public int missingNumber(int[] nums) {
+        int n = nums.length;
+
+        int expectedSum = (n*(n+1))/2;
+
+        int total = 0;
+        for(int num:nums){
+            total = total + num;
+        }
+        return expectedSum - total;
+    }
+}
