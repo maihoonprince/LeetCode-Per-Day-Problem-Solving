@@ -1,0 +1,26 @@
+March-3. Remove Nth Node from End of List:
+
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode current = dummy, nth = dummy;
+        
+        // Move current pointer n+1 steps ahead
+        for (int i = 0; i <= n; i++) {
+            current = current.next;
+        }
+        
+        // Move current to the end, maintaining the gap of n+1 steps between current and nth
+        while (current != null) {
+            current = current.next;
+            nth = nth.next;
+        }
+        
+        // Remove the nth node
+        nth.next = nth.next.next;
+
+        return dummy.next;
+    }
+}
