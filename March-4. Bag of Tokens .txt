@@ -1,0 +1,25 @@
+March-4. Bag of Tokens :
+948.
+
+class Solution {
+    public int bagOfTokensScore(int[] tokens, int p) {
+        Arrays.sort(tokens);
+        int l=0, r=tokens.length-1;
+        int score=0, maxScore=0;
+        while(l<=r){
+            if(p >= tokens[l]){
+                p-=tokens[l++];
+                score++;
+                maxScore = Math.max(maxScore, score);
+            }
+            else if(score>0){
+                p+=tokens[r--];
+                score--;
+            }
+            else{
+                break;
+            }
+        }
+        return maxScore;
+    }
+}
