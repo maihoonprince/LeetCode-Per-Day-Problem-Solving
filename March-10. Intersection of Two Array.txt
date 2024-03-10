@@ -1,0 +1,37 @@
+March-10. Intersection of Two Arrays:
+349. 
+
+
+
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> set = new HashSet<>();
+        Set<Integer> intersection = new HashSet<>();
+
+        // Add all elements of nums1 to the set
+        for (int num : nums1) {
+            set.add(num);
+        }
+
+        // Check each element of nums2 to see if it's in the set (nums1)
+        // If it is, add it to the intersection set
+        for (int num : nums2) {
+            if (set.contains(num)) {
+                intersection.add(num);
+            }
+        }
+
+        // Convert the intersection set back to an array
+        int[] result = new int[intersection.size()];
+        int i = 0;
+        for (Integer num : intersection) {
+            result[i++] = num;
+        }
+
+        return result;
+    }
+}
