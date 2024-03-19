@@ -1,0 +1,22 @@
+March-19. Task Scheduler :
+621.
+
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+        //Build Frquency Array
+        int[] freq = new int[26];
+        for(char task : tasks) {
+            freq[task-'A']++;
+        }
+        Arrays.sort(freq);//Sort to get max frequency
+        int maxFreq = freq[25];
+        int idleTime = (maxFreq-1) * n;//eg, A : 3, n=2 -> A_ _A_ _A
+
+        for(int i = 24; i >= 0; i--) {
+            //Math.min handles the case where another task has same freq
+            idleTime-= Math.min(maxFreq-1, freq[i]);
+        }
+        //Idle time cannot be negative, cap at 0
+        return tasks.length + Math.max(idleTime, 0);
+    }
+}
